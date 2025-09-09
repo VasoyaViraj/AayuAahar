@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Storage} from "appwrite";
+import { Client, Databases, ID, Storage, Account} from "appwrite";
 
 class Database {
 
@@ -10,83 +10,50 @@ class Database {
 
     storage = new Storage(this.client);
 
-    async createEvent(eventToCreate){
+    account = new Account(this.client);
+
+    async createAuthSession(user){
         try{
-            const response = await this.databases.createDocument(
-                import.meta.env.VITE_APPWRITE_DATABASEID,
-                import.meta.env.VITE_APPWRITE_EVENTS_COLLECTIONID,
-                ID.unique(),
-                eventToCreate
-            );
-            return response.documents;
+            const res = await this.account.createEmailPasswordSession(user.email, user.password);
+            return res;
         }catch(e){
-            console.log("Error occured while creating a new event : ", e);
+            console.log("Error occured while creating user session :", e);
         }
     }
 
-    async getAllEvents(){
+    async getCurrentUser(){
         try{
-            const response = await this.databases.listDocuments(
-                String(import.meta.env.VITE_APPWRITE_DATABASEID),
-                String(import.meta.env.VITE_APPWRITE_EVENTS_COLLECTIONID),
-            )
-            return response.documents;
+            const res = await this.account.get();
+            console.log(res);   
+            return res;
         }catch(e){
-            console.log("Error occured while fetching all events data : ", e);
+            console.log("Error occured while fetching current user :", e);
         }
     }
 
-    async updateEvent(id, data){
-        try { 
-            const res = await this.databases.updateDocument(
-                String(import.meta.env.VITE_APPWRITE_DATABASEID),
-                String(import.meta.env.VITE_APPWRITE_EVENTS_COLLECTIONID),
-                id,
-                data
-            )
-            return res
-        }catch(error){
-            console.log("Error occured while updating event : ", error);
+    async logoutAuthSession() {
+        try {
+          const res = await this.account.deleteSession('current');
+          return res;
+        } catch (e) {
+          console.log("Error occurred while logging out current user:", e);
         }
-    }
+      }
 
-    async deleteEvent(id){
-        try { 
-            const res = await this.databases.deleteDocument(
-                String(import.meta.env.VITE_APPWRITE_DATABASEID),
-                String(import.meta.env.VITE_APPWRITE_EVENTS_COLLECTIONID),
-                id
-            )
-            return res
-        }catch(error){
-            console.log("Error occured while deleting event : ", e);
-        }
-    }
+    // async createEvent(eventToCreate){
+    //     try{
+    //         const response = await this.databases.createDocument(
+    //             import.meta.env.VITE_APPWRITE_DATABASEID,
+    //             import.meta.env.VITE_APPWRITE_EVENTS_COLLECTIONID,
+    //             ID.unique(),
+    //             eventToCreate
+    //         );
+    //         return response.documents;
+    //     }catch(e){
+    //         console.log("Error occured while creating a new event : ", e);
+    //     }
+    // }
 
-    async uploadFile(file){
-        try{
-            const uploadedFile = await this.storage.createFile(
-                import.meta.env.VITE_APPWRITE_BUCKETID,
-                ID.unique(),
-                file
-            )
-            return uploadedFile;
-        }catch(e){
-            console.log("Error occured while uploading file : ", e);
-        }
-    }
-
-    async deleteFile(id){
-        try{
-            const res = await this.storage.deleteFile(
-                import.meta.env.VITE_APPWRITE_BUCKETID,
-                id
-            )
-            return red;
-        }catch(e){
-            console.log("Error occured while uploading file : ", e);
-        }
-    }
 }
 
 const DBService = new Database();
