@@ -1,10 +1,20 @@
+import { BrowserRouter, Routes, Route} from "react-router-dom";
+import LoginPage from "./pages/Login"
+import HomePage from "./pages/HomePage"
+import { UserContextProvider } from "./contexts/UserContext";
+
 function App() {
 
   return (
     <>
-      <div className='bg-red-500'>
-        Hello From AayuAahar
-      </div>
+      <UserContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage/>} />
+            <Route path="/login" element={<LoginPage/>} />
+          </Routes>
+        </BrowserRouter>
+      </UserContextProvider>
     </>
   )
 }
