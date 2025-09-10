@@ -24,7 +24,6 @@ class Database {
     async getCurrentUser(){
         try{
             const res = await this.account.get();
-            console.log(res);   
             return res;
         }catch(e){
             console.log("Error occured while fetching current user :", e);

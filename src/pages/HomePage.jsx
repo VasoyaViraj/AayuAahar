@@ -6,8 +6,6 @@ import { Leaf, Heart, Users, Calendar } from "lucide-react"
 
 export default function HomePage() {
 
-  
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
