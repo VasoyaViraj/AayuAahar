@@ -1,4 +1,4 @@
-import { DashboardLayout } from "@/components/dashboard-layout"
+import { DashboardLayout } from "@/components/Dashboard-layout"
 import { PageHeader } from "@/components/page-header"
 import { PatientProfile } from "@/components/patient/patient-profile"
 import { TodaysReports } from "@/components/receptionist/reportListV2"
