@@ -9,7 +9,7 @@ import { TodaysReports } from "@/components/receptionist/reportListV2"
 export default function ReceptionistPage() {
   return (
       <DashboardLayout>
-        <div className="space-y-6">
+        <div className="space-y-6 min-h-screen">
           <PageHeader title="Receptionist Dashboard" description="Manage patient registrations and daily visits">
             <div className="flex items-center gap-2">
               {/* <Button variant="outline" size="sm">

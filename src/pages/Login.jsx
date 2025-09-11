@@ -1,5 +1,5 @@
 import { LoginForm } from "@/components/auth/login-form"
-import { Navbar } from "@/components/navbar"
+import { Navbar } from "@/components/Navbar"
 import { Leaf } from "lucide-react"
 import { Link } from "react-router-dom";
 

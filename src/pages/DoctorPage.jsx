@@ -15,7 +15,7 @@ export default function DoctorPage() {
 
     return (
         <DashboardLayout>
-            <div className="space-y-6">
+            <div className="space-y-6 min-h-screen">
             <PageHeader title="Doctor Dashboard" description="Manage your patients and create consultation reports">
                 <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm">

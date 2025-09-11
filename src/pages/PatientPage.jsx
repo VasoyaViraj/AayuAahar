@@ -11,7 +11,7 @@ export default function PatientPage() {
 
   return (
       <DashboardLayout>
-        <div className="space-y-6">
+        <div className="space-y-6 min-h-screen">
           <PageHeader title="Patient Dashboard" description="View your profile information and medical reports" />
 
           <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">

@@ -4,19 +4,19 @@ import {  DBService } from '@/services/appwriteConfig.js';
 export const userContext = createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    "id" : "doc_002",
-    "name" : "Aayush Parekh",
-    "email" : "aayush@aa.in",
-    "role" : "doctor" 
-  });
-
   // const [user, setUser] = useState({
-  //   "id" : "pat_002",
-  //   "name" : "Viraj Vasoya",
-  //   "email" : "viraj@aa.in",
-  //   "role" : "patient" 
+  //   "id" : "doc_002",
+  //   "name" : "Aayush Parekh",
+  //   "email" : "aayush@aa.in",
+  //   "role" : "pa" 
   // });
+
+  const [user, setUser] = useState({
+    "id" : "pat_002",
+    "name" : "Viraj Vasoya",
+    "email" : "viraj@aa.in",
+    "role" : "patient" 
+  });
 
   // useEffect(() => {
   //   const getCurrentUser = async () => {
