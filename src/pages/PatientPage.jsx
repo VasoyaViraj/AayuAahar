@@ -1,5 +1,5 @@
 import { DashboardLayout } from "@/components/Dashboard-layout"
-import { PageHeader } from "@/components/page-header"
+import { PageHeader } from "@/components/Page-header"
 import { PatientProfile } from "@/components/patient/patient-profile"
 import { TodaysReports } from "@/components/receptionist/reportListV2"
 import { userContext } from "@/contexts/UserContext"

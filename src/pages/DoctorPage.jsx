@@ -1,5 +1,5 @@
 import { DashboardLayout } from "@/components/Dashboard-layout"
-import { PageHeader } from "@/components/page-header"
+import { PageHeader } from "@/components/Page-header"
 // import { TodaysReports } from "@/components/receptionist/todays-reports"
 import { CreatePatientReportForm } from "@/components/doctor/create-patient-report-form"
 import { Button } from "@/components/ui/button"
