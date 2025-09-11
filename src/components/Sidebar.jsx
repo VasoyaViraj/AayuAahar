@@ -32,6 +32,11 @@ export function Sidebar({ className }) {
       path: "/profile",
     },
     {
+      label: "Switch",
+      icon: User,
+      path: "/user",
+    },
+    {
       label: "Logout",
       icon: LogOut,
       path: "/logout",
@@ -66,7 +71,7 @@ export function Sidebar({ className }) {
               {dashboardItems.map((item) => (
                 <Link
                   key={item.path}
-                  href={item.path}
+                  to={item.path}
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
@@ -87,7 +92,7 @@ export function Sidebar({ className }) {
               {accountItems.map((item) => (
                 <Link
                   key={item.path}
-                  href={item.path}
+                  to={item.path}
                   className={cn(
                     "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",

@@ -1,11 +1,18 @@
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { PageHeader } from "@/components/page-header"
-import { TodaysReports } from "@/components/receptionist/todays-reports"
+// import { TodaysReports } from "@/components/receptionist/todays-reports"
 import { CreatePatientReportForm } from "@/components/doctor/create-patient-report-form"
 import { Button } from "@/components/ui/button"
 import { Calendar, Users } from "lucide-react"
+import { TodaysReports } from "@/components/receptionist/reportListV2" 
+import { useContext } from "react"
+import { userContext } from "@/contexts/UserContext"
 
 export default function DoctorPage() {
+
+    const {user} = useContext(userContext)
+    let docID = user.id || "doc_001";
+
     return (
         <DashboardLayout>
             <div className="space-y-6">
@@ -24,7 +31,8 @@ export default function DoctorPage() {
 
             <div className="grid gap-6 lg:grid-cols-2">
                 <div className="space-y-6">
-                <TodaysReports doctorFilter={true} />
+                {/* <TodaysReports doctorFilter={true} /> */}
+                <TodaysReports doctorId={docID} doctorFilter={true} onlyToday={true} />
                 </div>
 
                 <div className="space-y-6">

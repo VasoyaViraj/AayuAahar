@@ -1,9 +1,10 @@
 import { DashboardLayout } from "@/components/Dashboard-layout"
 import { PageHeader } from "@/components/Page-header"
 import { RegisterPatientForm } from "@/components/receptionist/register-patient-form"
-import { TodaysReports } from "@/components/receptionist/todays-reports"
+// import { TodaysReports } from "@/components/receptionist/todays-reports"
 import { Button } from "@/components/ui/button"
 import { Calendar, Search } from "lucide-react"
+import { TodaysReports } from "@/components/receptionist/reportListV2" 
 
 export default function ReceptionistPage() {
   return (
@@ -30,7 +31,7 @@ export default function ReceptionistPage() {
 
             {/* Today's Reports - Right Column */}
             <div className="space-y-6">
-              <TodaysReports />
+              <TodaysReports onlyToday={true}/>
             </div>
           </div>
         </div>

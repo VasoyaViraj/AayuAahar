@@ -6,43 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { FileText, Save, Send, User } from "lucide-react"
-
-// Mock patient data - replace with actual API call
-const mockPatients = [
-  {
-    $id: "1",
-    patName: "Priya Sharma",
-    patAge: 32,
-    patGender: "Female",
-    patHeight: "165 cm",
-    patWeight: "58 kg",
-    patBloodGroup: "A+",
-    patEmail: "priya.sharma@email.com",
-    patMobNumber: "+91 9876543210",
-  },
-  {
-    $id: "2",
-    patName: "Rajesh Kumar",
-    patAge: 45,
-    patGender: "Male",
-    patHeight: "175 cm",
-    patWeight: "72 kg",
-    patBloodGroup: "B+",
-    patEmail: "rajesh.kumar@email.com",
-    patMobNumber: "+91 9876543211",
-  },
-  {
-    $id: "3",
-    patName: "Anjali Mehta",
-    patAge: 28,
-    patGender: "Female",
-    patHeight: "160 cm",
-    patWeight: "55 kg",
-    patBloodGroup: "O+",
-    patEmail: "anjali.mehta@email.com",
-    patMobNumber: "+91 9876543212",
-  },
-]
+import { mockPatients } from "@/services/mockData.js"
 
 export function CreatePatientReportForm() {
   const [selectedPatient, setSelectedPatient] = useState(null)
@@ -241,7 +205,7 @@ export function CreatePatientReportForm() {
                     <SelectContent>
                       <SelectItem value="consultation">Consultation</SelectItem>
                       <SelectItem value="follow-up">Follow-up</SelectItem>
-                      <SelectItem value="emergency">Emergency</SelectItem>
+                      <SelectItem value="new-patient">New Patient</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>

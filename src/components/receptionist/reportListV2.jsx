@@ -15,106 +15,38 @@ import { Separator } from "@/components/ui/separator"
 import { FileText, Clock, User, Stethoscope, Utensils, Eye } from "lucide-react"
 import { mockPatients,  mockReports } from "@/services/mockData"
 
-// Mock reports data with the specified database structure
-const todaysReports = [
-  {
-    $id: "report_001",
-    patID: "pat_001",
-    docID: "doc_001",
-    docName: "Dr. Rajesh Kumar",
-    visitType: "Follow-up",
-    patName: "Priya Sharma",
-    patAge: 32,
-    patGender: "Female",
-    patHeight: "165 cm",
-    patWeight: "58 kg",
-    lifestyle: "Sedentary",
-    prakriti: "Vata-Pitta",
-    conditions: "Digestive issues, Stress",
-    goal: "Improve digestion and reduce stress",
-    bowelMovements: "Irregular",
-    waterIntake: "2-3 glasses daily",
-    dietPref: "Vegetarian",
-    problemDescByDoctor: "Patient experiencing irregular digestion and high stress levels affecting sleep quality.",
-    solutionByDoctor: "Prescribed Ayurvedic herbs and lifestyle modifications. Recommended meditation and yoga.",
-    followUpDate: "2024-01-15",
-    dietChart: {
-      breakfast: { name: "Oats with almonds", grams: "50g oats + 10 almonds", calories: 320 },
-      lunch: { name: "Dal rice with vegetables", grams: "100g rice + 50g dal + 100g vegetables", calories: 450 },
-      highTea: { name: "Herbal tea with biscuits", grams: "1 cup tea + 2 biscuits", calories: 150 },
-      dinner: { name: "Khichdi with ghee", grams: "80g khichdi + 1 tsp ghee", calories: 280 },
-    },
-    $createdAt: "2024-01-08T09:30:00Z",
-    $updatedAt: "2024-01-08T09:30:00Z",
-  },
-  {
-    $id: "report_002",
-    patID: "pat_002",
-    docID: "doc_002",
-    docName: "Dr. Anjali Mehta",
-    visitType: "New Patient",
-    patName: "Rajesh Kumar",
-    patAge: 45,
-    patGender: "Male",
-    patHeight: "175 cm",
-    patWeight: "78 kg",
-    lifestyle: "Active",
-    prakriti: "Kapha-Vata",
-    conditions: "Joint pain, High cholesterol",
-    goal: "Reduce joint inflammation and cholesterol",
-    bowelMovements: "Regular",
-    waterIntake: "4-5 glasses daily",
-    dietPref: "Non-vegetarian",
-    problemDescByDoctor: "Patient has chronic joint pain and elevated cholesterol levels. Needs dietary intervention.",
-    solutionByDoctor: "Prescribed anti-inflammatory herbs and cholesterol-reducing diet plan.",
-    followUpDate: "2024-01-20",
-    dietChart: {
-      breakfast: { name: "Green smoothie with protein", grams: "200ml smoothie + 20g protein", calories: 280 },
-      lunch: { name: "Grilled chicken with quinoa", grams: "100g chicken + 80g quinoa + salad", calories: 520 },
-      highTea: { name: "Green tea with nuts", grams: "1 cup tea + 15g mixed nuts", calories: 120 },
-      dinner: { name: "Fish curry with brown rice", grams: "100g fish + 60g brown rice", calories: 380 },
-    },
-    $createdAt: "2024-01-08T11:15:00Z",
-    $updatedAt: "2024-01-08T11:15:00Z",
-  },
-  {
-    $id: "report_003",
-    patID: "pat_003",
-    docID: "doc_001",
-    docName: "Dr. Rajesh Kumar",
-    visitType: "Consultation",
-    patName: "Anjali Mehta",
-    patAge: 28,
-    patGender: "Female",
-    patHeight: "160 cm",
-    patWeight: "52 kg",
-    lifestyle: "Moderate",
-    prakriti: "Pitta",
-    conditions: "Acidity, Skin issues",
-    goal: "Clear skin and reduce acidity",
-    bowelMovements: "Regular",
-    waterIntake: "6-8 glasses daily",
-    dietPref: "Vegetarian",
-    problemDescByDoctor: "Patient has chronic acidity and skin breakouts. Pitta imbalance evident.",
-    solutionByDoctor: "Cooling herbs prescribed. Pitta-pacifying diet recommended with lifestyle changes.",
-    followUpDate: "2024-01-18",
-    dietChart: {
-      breakfast: { name: "Coconut water with fruits", grams: "200ml coconut water + 100g fruits", calories: 180 },
-      lunch: { name: "Cooling vegetables with rice", grams: "100g rice + 120g cooling vegetables", calories: 380 },
-      highTea: { name: "Mint tea with crackers", grams: "1 cup mint tea + 3 crackers", calories: 100 },
-      dinner: { name: "Moong dal soup", grams: "150ml soup + 1 roti", calories: 220 },
-    },
-    $createdAt: "2024-01-08T14:30:00Z",
-    $updatedAt: "2024-01-08T14:30:00Z",
-  },
-]
-
-export function TodaysReports({ doctorFilter = false, patFilter = false }) {
+export function TodaysReports({
+    doctorId = null,
+    patId = null, 
+    onlyToday = false,
+    title = "Reports",
+    doctorFilter = false
+    }) {
   const [selectedReport, setSelectedReport] = useState(null)
 
-  const filteredReports = doctorFilter
-    ? todaysReports.filter((report) => report.docID === "doc_001") // Replace with actual current doctor ID
-    : todaysReports
+//   const filteredReports = doctorFilter
+//     ? todaysReports.filter((report) => report.docID === "doc_001") // Replace with actual current doctor ID
+//     : todaysReports
+
+    const isToday = (dateString) => {
+        const today = new Date().toISOString().slice(0, 10)
+        return dateString.slice(0, 10) === today
+    }
+
+  // Apply filters
+  let filteredReports = mockReports
+
+  if (doctorId) {
+    filteredReports = filteredReports.filter((r) => r.docID === doctorId)
+  }
+
+  if (patId) {
+    filteredReports = filteredReports.filter((r) => r.patID === patId)
+  }
+
+  if (onlyToday) {
+    filteredReports = filteredReports.filter((r) => isToday(r.$createdAt))
+  }
 
   const getVisitTypeColor = (type) => {
     switch (type) {
@@ -146,7 +78,8 @@ export function TodaysReports({ doctorFilter = false, patFilter = false }) {
           <div>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-primary" />
-              {doctorFilter ? "My Today's Reports" : "Today's Reports"}
+              {/* {doctorFilter ? "My Today's Reports" : "Today's Reports"} */}
+              {title}
             </CardTitle>
             <CardDescription>
               {doctorFilter
